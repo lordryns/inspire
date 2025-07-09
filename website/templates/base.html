@@ -1,15 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{%block title%}{%endblock%}</title>
-    <link href="{{url_for('static', filename='style.css')}}" rel="stylesheet">
-  </head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %}Inspire — Curated Clips for Creators{% endblock %}</title>
+    <meta name="description" content="{% block description %}Discover and download clean, high-quality clips for your edits — anime, gaming, aesthetic and more.{% endblock %}" />
+    <meta name="keywords" content="Inspire, anime clips, video editing, edit clips, aesthetic, edit packs, video resources" />
+    <meta name="author" content="Inspire" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% block og_title %}Inspire — Curated Clips for Creators{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Handpicked clips ready to download and use in your edits — anime, gaming, and more.{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='og-image.jpg') }}{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.url }}" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% block twitter_title %}Inspire — Curated Clips for Creators{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_description %}Discover and download free clips to use in edits — fast and aesthetic.{% endblock %}" />
+    <meta name="twitter:image" content="{% block twitter_image %}{{ url_for('static', filename='og-image.jpg') }}{% endblock %}" />
+
+    <link rel="canonical" href="{{ request.url }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+
+
+<!-- You MUST include jQuery 3.4+ before Fomantic -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.9.4/dist/semantic.min.js"></script>
+ 
+    <!-- i18next (autodetect + fallback to English) -->
+    <script src="https://unpkg.com/i18next@21.6.14/dist/umd/i18next.min.js"></script>
+   
+  <script>
+      const userLang = (navigator.language || 'en').slice(0, 2);
+
+      i18next.init({
+        lng: userLang,
+        fallbackLng: 'en',
+        resources: {
+          en: {
+            translation: {}  // Placeholder in case you want to add keys later
+          }
+        }
+      });
+    </script>
+
+ </head>
+
   <body>
     <main>
-      {%block content%}
-      {%endblock%}
+      {% block content %}
+        <h1>Welcome to Inspire</h1>
+        <p>Discover curated clips for your edits</p>
+      {% endblock %}
     </main>
   </body>
 </html>
