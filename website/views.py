@@ -26,7 +26,12 @@ def download():
     if not file_link:
         return Response(None, type="text/plain")
 
-    query = requests.get(file_link, stream=True)
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+
+    query = requests.get(file_link, stream=True, headers=headers)
+    print(query.status_code)
 
     return Response(
             query.iter_content(chunk_size=8192),
