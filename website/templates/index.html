@@ -17,33 +17,10 @@
   </div>
 </div>
 
-
-
-<div class="ui container">
-  {% for i in range(all_metadata | length) %}
-  {% set metadata = all_metadata[(i + 1) | string] %}
-    <div class="ui card">
-        <video class="player" playsinline controls data-poster="/path/to/poster.jpg" controlslist="nodownload">
-          <source src="{{ metadata.download }}" type="video/mp4" />
-    </video>
-    <div class="content">
-      <a class="header">{{ metadata.title }}</a>
-      <div class="meta">
-        <span class="date">{{ metadata.duration }}</span>
-      </div>
-      <div class="description">
-        <span><b>Tags:</b> {{ metadata.tags }}</span>
-      </div>
-    </div>
-    <div class="extra content">
-      <a href="/download?url={{ metadata.download }}" download>
-        <i class="download icon"></i>
-        Download
-      </a>
-    </div>
-  </div>
-    <p>  </p>
-  {% endfor %}
+<br>
+<div class="ui stackable four column grid container" id="recentContainer">
+    <div class="ui active centered inline text loader">Preparing Clips</div>
 </div>
 
+<script src="{{ url_for('static', filename='index.js') }}"></script>
 {%endblock%}

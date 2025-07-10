@@ -13,6 +13,8 @@ def get() -> Union[str, dict]:
 get() 
 
 def append(data: dict):
+    if PANTRY_ID is None:
+        return
     current = get()
     if type(current) != dict:
         return
@@ -31,6 +33,8 @@ def append(data: dict):
 
 
 def delete(id: int):
+    if PANTRY_ID is None:
+        return
     current = get() 
     if type(current) != dict:
         return 
