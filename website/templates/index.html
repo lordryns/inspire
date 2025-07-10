@@ -23,9 +23,8 @@
   {% for i in range(all_metadata | length) %}
   {% set metadata = all_metadata[(i + 1) | string] %}
     <div class="ui card">
-        <video id="player" playsinline controls data-poster="/path/to/poster.jpg" controlslist="nodownload">
+        <video class="player" playsinline controls data-poster="/path/to/poster.jpg" controlslist="nodownload">
           <source src="{{ metadata.download }}" type="video/mp4" />
-          <source src="/path/to/video.webm" type="video/webm" />
     </video>
     <div class="content">
       <a class="header">{{ metadata.title }}</a>
@@ -46,6 +45,5 @@
     <p>  </p>
   {% endfor %}
 </div>
-
 
 {%endblock%}
