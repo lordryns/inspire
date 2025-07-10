@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, Response
 import os, dotenv
 from pantry_wrapper import get_contents
 from typing import Union
+import requests
 
 views = Blueprint("views", __name__)
 
@@ -23,5 +24,14 @@ def home():
 def download():
     file_link = request.args.get("url")
     if not file_link:
-        return jsonify({"message": "File not found!", "status_code": 500})
+        return Response(None, type="text/plain")
 
+    query = requests.get(file_link, stream=True)
+
+    return Response(
+            query.iter_content(chunk_size=8192),
+            headers={
+                "Content-Disposition": 'attachment; filename="video.mp4"',
+                "Content-Type": "application/octet-stream"
+            }
+        )
