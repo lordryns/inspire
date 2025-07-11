@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 function videoCard(title, duration, tags, downloadLink) {
-  return `<div class="ui card">
+  return `<div class="ui column">
+<div class="ui card">
         <video class="player ui placeholder" playsinline controls data-poster="/path/to/poster.jpg" controlslist="nodownload">
           <source src="${downloadLink}" type="video/mp4" />
     </video>
@@ -34,5 +35,6 @@ function videoCard(title, duration, tags, downloadLink) {
       </a>
     </div>
   </div>
+</div>
 ` 
 }
