@@ -2,5 +2,38 @@
 
 {% block title %} Inspire: Admin {% endblock %}
 {% block content %}
-<p>Hello from the Admin</p>
+<br>
+<form class="ui form container">
+  <div class="field">
+    <label>Title</label>
+    <input type="text" name="title" placeholder="Title" required>
+  </div>
+  <div class="field">
+    <label>Catbox Link</label>
+    <input type="url" name="download-link" placeholder="Catbox Link" required>
+  </div>
+
+  <div class="field">
+    <label>Tags</label>
+    <input type="text" name="tags" placeholder="Tags (seperate using commas)">
+  </div>
+
+  <div class="field">
+    <label>Creator</label>
+    <input type="text" name="creator" placeholder="Creator">
+  </div>
+
+  <div class="field">
+    <label>Duration</label>
+    <input type="text" name="duration" placeholder="Duration">
+  </div>
+
+  <div class="field">
+    <label>Source</label>
+    <input type="text" name="source" placeholder="Source">
+  </div>
+
+
+  <button class="ui button" type="submit">Submit</button>
+</form>
 {% endblock %}
