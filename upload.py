@@ -14,11 +14,11 @@ get()
 
 def append(data: dict):
     if PANTRY_ID is None:
-        return
+        raise Exception("PANTRY_ID does not exist as an enviroment variable!")
     current = get()
     if type(current) != dict:
-        return
-    keys: list[str] = list(current.keys() )
+        raise Exception("Failed to get data from Pantry, did not return a dict as expected! This might be caused by an error.")
+    keys: list[str] = list(current.keys())
 
     if len(keys) > 0 and keys[-1].isnumeric():
         new_key = int(keys[-1]) + 1 
@@ -42,13 +42,13 @@ def delete(id: int):
     del current[str(id)] 
     append_basket(PANTRY_ID, "metadata", current)
 
-append({
+""" append({
     "title": "Fraud and Toji", 
     "download": "https://files.catbox.moe/97uh1e.mp4", 
     "tags": ["gojo", "toji", "jjk", "jujutsu", "kaisen", "anime"], 
     "creator": None, 
     "duration": "14s", 
     "source": None
-})
+}) """
 
 

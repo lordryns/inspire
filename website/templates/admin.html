@@ -3,7 +3,28 @@
 {% block title %} Inspire: Admin {% endblock %}
 {% block content %}
 <br>
-<form class="ui form container">
+
+{% if success %}
+<div class="ui success message">
+  <i class="close icon"></i>
+  <div class="header">
+    Success
+  </div>
+  <p>{{ success }}</p>
+</div>
+{% endif %}
+
+{% if error %}
+<div class="ui negative message">
+  <i class="close icon"></i>
+  <div class="header">
+    Error
+  </div>
+  <p>{{ error }}</p>
+</div>
+{% endif %}
+
+<form class="ui form container" method="POST">
   <div class="field">
     <label>Title</label>
     <input type="text" name="title" placeholder="Title" required>

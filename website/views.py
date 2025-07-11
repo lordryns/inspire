@@ -5,6 +5,8 @@ from typing import Union
 import requests
 import tempfile
 
+from upload import append as append_to_pantry
+
 views = Blueprint("views", __name__)
 
 dotenv.load_dotenv()
@@ -47,9 +49,36 @@ def download():
 
 
 
-@views.route("/admin")
+@views.route("/admin", methods=['GET', 'POST'])
 def admin():
-    return render_template("admin.html")
+    success, error = None, None
+    tag_list = []
+    if request.method == 'POST':
+        title = request.args.get("title")
+        download_link = request.args.get("download-link")
+        tags = request.args.get("tags")
+        creator = request.args.get("creator")
+        duration = request.args.get("duration")
+        source = request.args.get("source")
+
+        if tags:
+            tag_list = tags.split(",")
+            tag_list = [t.strip() for t in tag_list]
+
+        try:
+            append_to_pantry({
+                "title": title, 
+                "download": download_link, 
+                "tags": tag_list, 
+                "creator": creator if creator else None, 
+                "duration": duration if duration else None, 
+                "source": source if source else None
+            })
+
+            success = "Clip metadata has been added! Ensure that this endpoint did not silently fail."
+        except Exception:
+            error = "Failed to append metadata! This is most likely an issue from Pantry."
+    return render_template("admin.html", success=success, error=error)
 
 
 @views.route("/api/get_recent")
